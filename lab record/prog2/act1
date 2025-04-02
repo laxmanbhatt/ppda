@@ -1,0 +1,31 @@
+def word_frequency(sentence):
+  """Counts the frequency of each word in a sentence."""
+
+  word_count = 0
+  word_frequency_dict = {}
+
+  # Remove punctuation and convert to lowercase
+  import string
+  sentence = sentence.translate(str.maketrans('', '', string.punctuation)).lower()
+
+  words = sentence.split()
+
+  for word in words:
+    word_count += 1
+    if word in word_frequency_dict:
+      word_frequency_dict[word] += 1
+    else:
+      word_frequency_dict[word] = 1
+
+  return word_count, word_frequency_dict
+
+def main():
+    sentence = input("Enter a sentence: ")
+    count, frequency = word_frequency(sentence)
+    print(f"Word count: {count}")
+    print("Word frequency:")
+    for word, freq in frequency.items():
+        print(f"  {word}: {freq}")
+
+if __name__ == "__main__":
+    main()
