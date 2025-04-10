@@ -1,0 +1,13 @@
+import pandas as pd
+
+data = [
+    {"product": "Laptop", "category": "Electronics", "price": 1200},
+    {"product": "Coffee Maker", "category": "Appliances", "price": 80},
+    {"product": "Sneakers", "category": "Footwear", "price": 150},
+    {"product": "Smartphone", "category": "Electronics", "price": 900},
+    {"product": "Backpack", "category": "Accessories", "price": 60}
+]
+
+df = pd.DataFrame(data)
+df["discounted_price"] = df["price"] * 0.9
+print(df)
