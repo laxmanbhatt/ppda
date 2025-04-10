@@ -1,34 +1,18 @@
-def merge_dictionaries(dict1, dict2):
-  """Merges two dictionaries, adding values for overlapping keys."""
-
-  merged_dict = dict1.copy()  # Start with a copy of the first dictionary
-
-  for key, value in dict2.items():
-    if key in merged_dict:
-      # If the key exists in both, add the values
-      if isinstance(merged_dict[key], (int, float)) and isinstance(value, (int, float)):
-        merged_dict[key] += value
-      elif isinstance(merged_dict[key], str) and isinstance(value, str):
-        merged_dict[key] += value
-      elif isinstance(merged_dict[key], list) and isinstance(value, list):
-        merged_dict[key].extend(value)
-      else:
-          # If the types are different or not handled, print a warning or handle as needed.
-          print(f"Warning: Overlapping key '{key}' with incompatible types. Using value from second dictionary.")
-          merged_dict[key] = value
-
-    else:
-      # If the key is unique to dict2, add it to the merged dictionary
-      merged_dict[key] = value
-
-  return merged_dict
-
-def main():
-    dict1 = {"a": 1, "b": 2, "c": 3, "d": "hello", "e": [1,2,3]}
-    dict2 = {"b": 5, "c": 10, "d": " world", "f": 4, "e": [4,5,6]}
-
-    merged = merge_dictionaries(dict1, dict2)
-    print("Merged dictionary:", merged)
+def merge_dictionaries(d1, d2):
+    merged = d1.copy()
+    for k, v in d2.items():
+        if k in merged:
+            a, b = merged[k], v
+            if type(a) == type(b) and isinstance(a, (int, float, str, list)):
+                merged[k] = a + b if not isinstance(a, list) else a + b
+            else:
+                print(f"Warning: Overlapping key '{k}' with incompatible types. Using value from second dictionary.")
+                merged[k] = b
+        else:
+            merged[k] = v
+    return merged
 
 if __name__ == "__main__":
-    main()
+    d1 = {"a": 1, "b": 2, "c": 3, "d": "hello", "e": [1,2,3]}
+    d2 = {"b": 5, "c": 10, "d": " world", "f": 4, "e": [4,5,6]}
+    print("Merged dictionary:", merge_dictionaries(d1, d2))
